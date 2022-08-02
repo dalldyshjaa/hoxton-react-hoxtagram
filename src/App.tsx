@@ -13,6 +13,13 @@ function App() {
     let match: any = copyPostImages.find((copyPost) => post.id === copyPost.id);
     match.likes++;
     setPostImages(copyPostImages);
+    fetch(`http://localhost:3006/images/${match.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(match),
+    });
   }
   function addComment(content: string, imageId: number) {
     fetch("http://localhost:3006/comments", {
